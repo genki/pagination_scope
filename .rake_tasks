@@ -1,0 +1,14 @@
+clean
+clobber
+clobber_package
+clobber_rdoc
+debug_gem
+gem
+gemspec
+package
+rdoc
+release
+repackage
+rerdoc
+rubyforge
+test
