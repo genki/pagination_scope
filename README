@@ -1,8 +1,11 @@
 = pagination_scope
 
+This is a rails plugin module for mixing in pagination function.
+
 == Description
 
-  This is a rails plugin module for mixing in pagination function.
+This library is suitable to use together with complicated named_scope which has
+:joins options.  You can use the WillPaginate for ordinary case of pagination.
 
 == Installation
 
@@ -19,6 +22,21 @@
 
 
 == Synopsis
+
+In your model class,
+
+  class Post
+    include PaginationScope
+
+In your controller class,
+
+  class PostsController < ApplicationController
+    def index
+      @posts = Post.not_deleted.paginate(params[:page], 10)
+
+In your view html.erb,
+
+  <%= paginate @posts %>
 
 
 == Copyright
