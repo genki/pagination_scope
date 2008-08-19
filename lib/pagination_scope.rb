@@ -1,5 +1,5 @@
 module PaginationScope
-  VERSION = '0.0.2'
+  VERSION = '0.0.3'
 
   class << self
     def included(base)
@@ -43,7 +43,7 @@ module PaginationScope
       left = options[:left] || 2
       right = options[:right] || 2
       newer = options[:newer] || '&laquo; Newer'
-      older = options[:older] || '&raquo; Older'
+      older = options[:older] || 'Older &raquo;'
       page = model.page
       num_pages = model.num_pages
       pages = model.pages(window, left, right)
