@@ -1,5 +1,5 @@
 module PaginationScope
-  VERSION = '0.0.3'
+  VERSION = '0.0.4'
 
   class << self
     def included(base)
@@ -49,7 +49,8 @@ module PaginationScope
       pages = model.pages(window, left, right)
       return if pages.empty?
 
-      ([(page > 1 ? link_to(newer, url_for(:page => page - 1)) : newer)] +
+      ([(page > 1 ? link_to(newer,
+        url_for(:page => page - 1), :class => :newer) : newer)] +
       pages.map{|i|
         if i.nil?
           '...'
@@ -59,7 +60,8 @@ module PaginationScope
           link_to i, url_for(:page => i)
         end
       } + [
-        page < num_pages ? link_to(older, url_for(:page => page + 1)) : older
+        page < num_pages ? link_to(older,
+          url_for(:page => page + 1), :class => :older) : older
       ]).join("\n")
     end
   end
