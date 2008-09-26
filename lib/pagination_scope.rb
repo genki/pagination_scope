@@ -55,9 +55,13 @@ module PaginationScope
       pages      = model.pages(window, left, right)
       return if pages.empty?
 
-      span = proc{|*args| content_tag(:span, args[0].to_s, :class=>(args[1]||"disabled"))}
+      span = proc do |*args|
+        content_tag(:span, args[0].to_s, :class => (args[1]||"disabled"))
+      end
       items = []
-      items << ((page > 1) ? link_to(prev_label, url_for(:page => page - 1), :class => :prev, :rel=>"prev") : span.call(prev_label))
+      items << ((page > 1) ? link_to(prev_label,
+        url_for(:page => page - 1), :class => :prev, :rel => "prev") :
+        span.call(prev_label))
       items += pages.map{|i|
         if i.nil?
           truncate
@@ -67,9 +71,11 @@ module PaginationScope
           link_to i, url_for(:page => i)
         end
       }
-      items << ((page < num_pages) ? link_to(next_label, url_for(:page => page + 1), :class => :older, :rel=>"next") : span.call(next_label))
+      items << ((page < num_pages) ? link_to(next_label,
+        url_for(:page => page + 1), :class => :older, :rel => "next") :
+        span.call(next_label))
 
-      content_tag(:div, items.join("\n"), :class=>"pagination")
+      content_tag(:div, items.join("\n"), :class => "pagination")
     end
   end
 end
