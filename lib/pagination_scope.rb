@@ -1,12 +1,14 @@
 module PaginationScope
-  VERSION = '0.0.5'
+  VERSION = '0.0.6'
 
   class << self
     def included(base)
       base.class_eval do
-        named_scope :paginate, (proc do |page, per_page|
-          options = {:extend => PaginationScope::Extention}
-          page = (page || 1).to_i - 1
+        named_scope :paginate, (proc do |*args|
+          options  = args.last.is_a?(Hash) ? args.pop : {}
+          page     = (args.shift || options.delete(:page) || 1).to_i - 1
+          per_page = args.shift || options.delete(:per_page) || 10
+          options[:extend] = PaginationScope::Extention
           if per_page < 0
             per_page = -per_page
             options[:order] ||= "#{table_name}.id ASC"
@@ -27,7 +29,7 @@ module PaginationScope
     def count
       @count ||= proxy_scope.count(:group => "#{table_name}.id").size
     end
-    
+
     def num_pages; (count.to_f/proxy_options[:limit]).ceil end
     def page; proxy_options[:offset]/proxy_options[:limit] + 1 end
 
@@ -42,30 +44,32 @@ module PaginationScope
 
   module ::ApplicationHelper
     def paginate(model, options = {})
-      window = options[:window] || 5
-      left = options[:left] || 2
-      right = options[:right] || 2
-      newer = options[:newer] || '&laquo; Newer'
-      older = options[:older] || 'Older &raquo;'
-      page = model.page
-      num_pages = model.num_pages
-      pages = model.pages(window, left, right)
+      window     = options[:window] || 5
+      left       = options[:left] || 2
+      right      = options[:right] || 2
+      prev_label = options[:prev] || '&laquo; Prev'
+      next_label = options[:next] || 'Next &raquo;'
+      truncate   = options[:truncate] || '...'
+      page       = model.page
+      num_pages  = model.num_pages
+      pages      = model.pages(window, left, right)
       return if pages.empty?
 
-      ([(page > 1 ? link_to(newer,
-        url_for(:page => page - 1), :class => :newer) : newer)] +
-      pages.map{|i|
+      span = proc{|*args| content_tag(:span, args[0].to_s, :class=>(args[1]||"disabled"))}
+      items = []
+      items << ((page > 1) ? link_to(prev_label, url_for(:page => page - 1), :class => :prev, :rel=>"prev") : span.call(prev_label))
+      items += pages.map{|i|
         if i.nil?
-          '...'
+          truncate
         elsif i == page
-          i
+          span.call(i, "current")
         else
           link_to i, url_for(:page => i)
         end
-      } + [
-        page < num_pages ? link_to(older,
-          url_for(:page => page + 1), :class => :older) : older
-      ]).join("\n")
+      }
+      items << ((page < num_pages) ? link_to(next_label, url_for(:page => page + 1), :class => :older, :rel=>"next") : span.call(next_label))
+
+      content_tag(:div, items.join("\n"), :class=>"pagination")
     end
   end
 end
