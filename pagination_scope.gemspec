@@ -1,10 +1,10 @@
 Gem::Specification.new do |s|
   s.name = %q{pagination_scope}
-  s.version = "0.0.5"
+  s.version = "0.0.6"
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = ["Genki Takiuchi"]
-  s.date = %q{2008-09-24}
+  s.date = %q{2008-09-26}
   s.description = %q{}
   s.email = %q{genki@s21g.com}
   s.extra_rdoc_files = ["README", "ChangeLog"]
