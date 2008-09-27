@@ -27,6 +27,10 @@ module PaginationScope
 
   module Extention
     def count
+      @count ||= proxy_scope.count
+    end
+
+    def count_ids
       @count ||= proxy_scope.count(
         :group => "#{table_name}.#{primary_key}").size
     end
