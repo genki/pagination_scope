@@ -1,5 +1,5 @@
 module PaginationScope
-  VERSION = '0.0.6'
+  VERSION = '0.0.7'
 
   class << self
     def included(base)
@@ -27,7 +27,8 @@ module PaginationScope
 
   module Extention
     def count
-      @count ||= proxy_scope.count(:group => "#{table_name}.id").size
+      @count ||= proxy_scope.count(
+        :group => "#{table_name}.#{primary_key}").size
     end
 
     def num_pages; (count.to_f/proxy_options[:limit]).ceil end
