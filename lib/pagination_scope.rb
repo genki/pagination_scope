@@ -28,18 +28,15 @@ module PaginationScope
   end
 
   module Extention
-    def count
-      #@count ||= proxy_scope.count(:group => "#{table_name}.id").size
-      @count ||= with_scope :find => proxy_options.except(:offset) do
-        proxy_scope.count(:group => "#{table_name}.id").size
-      end
+    def size
+      proxy_found.size
     end
 
-#     def count_ids
-#       #@count ||= proxy_scope.count(
-#       proxy_scope.count(
-#         :group => "#{table_name}.#{primary_key}").size
-#     end
+    def count
+      @count ||= with_scope :find => proxy_options.except(:offset, :limit) do
+        proxy_scope.count(:distinct => true, :select => "#{table_name}.#{primary_key}")
+      end
+    end
 
     def num_pages; (count.to_f/proxy_options[:limit]).ceil end
     def page; proxy_options[:offset]/proxy_options[:limit] + 1 end
