@@ -2,7 +2,7 @@ require File.expand_path(File.join(File.dirname(__FILE__), '..', 'spec_helper'))
 
 describe PaginationScope::Pagination do
   before(:each) do
-    @conds = ["id < 5"]
+    @conds = ["id < 4"]
     @limit = 3
 
     # static values

@@ -29,8 +29,13 @@ make_connection(ActiveRecord::Base, sqlite_test_db)
 # --- Migration      ---
 # ----------------------------------------------------------------------
 
-require SPEC_ROOT + "migrations" + "1_create_users"
+Dir.glob(SPEC_ROOT + 'migrations' + '*.rb').sort.each do |migration|
+  require migration
+end
+
+# TODO: should resolv class names automatically
 CreateUsers.up
+CreateGroups.up
 
 Dir.glob(SPEC_ROOT + 'models' + '*.rb').each do |model|
   require model

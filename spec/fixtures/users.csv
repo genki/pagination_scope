@@ -1,8 +1,6 @@
-id,name
-1,maimi
-2,erika
-3,saki
-4,airi
-5,chisato
-6,mai
-7,kanna
+id,name,group_id
+1,momoko,1
+2,miyabi,1
+3,airi,1
+4,nksk,2
+5,chisato,2
