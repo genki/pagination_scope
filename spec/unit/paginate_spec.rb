@@ -42,7 +42,9 @@ describe PaginationScope do
   end
 
   it "should provide #proxy_options" do
-    User.paginate.should respond_to(:proxy_options)
+    User.paginate.class.should == ActiveRecord::NamedScope::Scope
+    pending
+    User.paginate.should be_respond_to(:proxy_options)
   end
 
   describe "#proxy_options" do
