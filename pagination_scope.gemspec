@@ -10,7 +10,7 @@ Gem::Specification.new do |s|
   s.description = %q{}
   s.email = %q{genki@s21g.com}
   s.extra_rdoc_files = ["README", "ChangeLog"]
-  s.files = ["README", "ChangeLog", "Rakefile", "test/pagination_scope_test.rb", "test/test_helper.rb", "lib/pagination_scope.rb", "rails/init.rb"]
+  s.files = ["README", "ChangeLog", "Rakefile", "spec/fixtures", "spec/fixtures/groups.csv", "spec/fixtures/users.csv", "spec/migrations", "spec/migrations/1_create_users.rb", "spec/migrations/2_create_groups.rb", "spec/models", "spec/models/group.rb", "spec/models/user.rb", "spec/spec_helper.rb", "spec/unit", "spec/unit/conditional_spec.rb", "spec/unit/helper_spec.rb", "spec/unit/include_spec.rb", "spec/unit/paginate_spec.rb", "lib/pagination_scope.rb", "rails/init.rb"]
   s.has_rdoc = true
   s.homepage = %q{http://pagination_scope.rubyforge.org}
   s.rdoc_options = ["--title", "pagination_scope documentation", "--charset", "utf-8", "--opname", "index.html", "--line-numbers", "--main", "README", "--inline-source", "--exclude", "^(examples|extras)/"]
@@ -18,7 +18,7 @@ Gem::Specification.new do |s|
   s.rubyforge_project = %q{pagination_scope}
   s.rubygems_version = %q{1.3.1}
   s.summary = %q{}
-  s.test_files = ["test/pagination_scope_test.rb"]
+  s.test_files = ["spec/unit/conditional_spec.rb", "spec/unit/helper_spec.rb", "spec/unit/include_spec.rb", "spec/unit/paginate_spec.rb"]
 
   if s.respond_to? :specification_version then
     current_version = Gem::Specification::CURRENT_SPECIFICATION_VERSION

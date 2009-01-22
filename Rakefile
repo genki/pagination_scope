@@ -31,7 +31,7 @@ RDOC_OPTS = [
 	"--inline-source",
 ]
 
-task :default => [:test]
+task :default => [:spec]
 task :package => [:clean]
 
 Rake::TestTask.new("test") do |t|
@@ -141,4 +141,9 @@ end
 desc 'Update gem spec'
 task :gemspec do
   open("#{NAME}.gemspec", 'w').write spec.to_ruby
+end
+
+desc 'Run specs'
+task :spec do
+  sh "spec --color spec"
 end

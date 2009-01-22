@@ -22,7 +22,7 @@ def make_connection(clazz, db_file)
   clazz.establish_connection(clazz.name)
 end
 
-sqlite_test_db  = "#{SPEC_ROOT}/test.sqlite3"
+sqlite_test_db  = "#{SPEC_ROOT}/../test.sqlite3"
 make_connection(ActiveRecord::Base, sqlite_test_db)
 
 # ----------------------------------------------------------------------
