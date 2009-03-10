@@ -1,7 +1,5 @@
 require 'pagination_scope'
 
-module ActiveRecord
-  class Base
-    include PaginationScope
-  end
+ActiveRecord::Base.class_eval do
+  include PaginationScope
 end
