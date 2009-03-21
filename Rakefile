@@ -15,7 +15,7 @@ NAME              = "pagination_scope"
 AUTHOR            = "Genki Takiuchi"
 EMAIL             = "genki@s21g.com"
 DESCRIPTION       = ""
-RUBYFORGE_PROJECT = "pagination_scope"
+RUBYFORGE_PROJECT = "asakusarb"
 HOMEPATH          = "http://#{RUBYFORGE_PROJECT}.rubyforge.org"
 BIN_FILES         = %w(  )
 
