@@ -1,3 +1,5 @@
-require 'pagination_scope'
+require File.join(File.dirname(__FILE__), %w(.. lib pagination_scope))
 
-ActiveRecord::Base.send :include, PaginationScope
+ActiveRecord::Base.class_eval do
+  include PaginationScope
+end
