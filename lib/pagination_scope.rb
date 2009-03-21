@@ -1,7 +1,7 @@
 require 'activesupport'
 
 module PaginationScope
-  VERSION = '0.0.8'
+  VERSION = '0.1.0'
 
   class << self
     def included(base)
