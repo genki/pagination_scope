@@ -1,7 +1,7 @@
 require 'activesupport'
 
 module PaginationScope
-  VERSION = '0.1.1'
+  VERSION = '0.1.2'
 
   class << self
     def included(base)
@@ -34,7 +34,11 @@ module PaginationScope
 
     def count
       @count ||= with_scope :find => proxy_options.except(:offset, :limit) do
-        proxy_scope.count(:distinct => true, :select => "#{table_name}.#{primary_key}")
+        if proxy_scope.respond_to?(:proxy_options)
+          select = proxy_scope.proxy_options[:group]
+        end
+        select ||= "#{table_name}.#{primary_key}"
+        proxy_scope.count(:distinct => true, :select => select)
       end
     end
 

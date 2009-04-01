@@ -3,7 +3,7 @@ require 'rubygems'
 require 'activerecord'
 require 'active_record/fixtures'
 
-gem 'rspec', '~>1.1.11'
+gem 'rspec'#, '~>1.1.11'
 require 'spec'
 
 SPEC_ROOT = Pathname(__FILE__).dirname.expand_path
